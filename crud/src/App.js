@@ -22,11 +22,12 @@ export default props => {
                 <Stack.Screen
                     name="UserList"
                     component={UserList}
-                    options={() => {
+                    options={({ navigation }) => {
                         return {
                             title: 'Lista de Usuários',
                             headerRight: () => (
                                 <Button
+                                    onPress={() => navigation.navigate('UserForm')}
                                     type='clear'
                                     icon={<AntDesign name='plus' size={24} color='white'/>}
                                 />

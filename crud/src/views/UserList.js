@@ -1,20 +1,30 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { Pressable } from 'react-native'
+import {View, StyleSheet, FlatList} from 'react-native';
+import { ListItem } from 'react-native-elements'
+
+import users from '../data/users'
+
 
 export default props => {
+
+    function getUserItem({item: user}) {
+        return (
+            <ListItem
+                leftAvatar={{source: {uri: user.avatarUrl}}}
+                key={user.id}
+                title={user.name}
+                subTitle={user.email}
+                bottomDivider
+            />
+        )
+    }
     return (
-        <>
-            {/* <Button
-                type="clear"
-                icon={<AntDesign name='plus' size={24} color='white'/>}
-            /> */}
-            <Pressable>
-                <AntDesign name='plus' size={24} color='black'/>
-            </Pressable>
-            
-            <Text>Use List</Text>
-        </>
+        <View>
+            <FlatList
+                keyExtractor={user => user.id.toString()}
+                data={users}
+                renderItem={getUserItem}
+            />
+        </View>
     )
 }
