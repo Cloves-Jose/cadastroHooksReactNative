@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Text, View, TextInput, StyleSheet, Button } from 'react-native'
+import UsersContext from '../context/UserContext'
 
 export default ({route, navigation}) => {
 
@@ -11,6 +12,7 @@ export default ({route, navigation}) => {
     //useState, sendo user a variável que receberá a 
     //resposta (return) e setUser o nome da função.
     const [user, setUser] = useState(route.params ? route.params : {})
+    const { dispatch } = useContext(UsersContext)
 
     return (
         <View style={styles.form}>
@@ -42,6 +44,10 @@ export default ({route, navigation}) => {
                 title='Salvar'
                 onPress={() => {
                     //Essa função é responsável por voltar a página inicial de listagem
+                    dispatch({
+                        type: user.id ? 'updateUser' : 'createUser',
+                        payload: user,
+                    })
                     navigation.goBack()
                 }}
             />

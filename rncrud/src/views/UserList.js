@@ -11,7 +11,7 @@ export default props => {
     //minha aplicação para todos os componentes.
     //Dessa forma eu não preciso mais importar os dados 
     //diretamente no meu componente.
-    const { state } = useContext(UsersContext)
+    const { state, dispatch } = useContext(UsersContext)
 
     //Essa função recebe um usuário como parâmetro porque eu 
     //preciso excluir os dados daquele usuário
@@ -20,7 +20,10 @@ export default props => {
             {
                 text: 'Sim',
                 onPress() {
-                    console.warn('deletado ' + user.id)
+                    dispatch({
+                        type: 'deleteUser',
+                        payload: user,
+                    })
                 }
             },
             {
